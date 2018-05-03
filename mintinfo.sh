@@ -97,11 +97,38 @@ sysspeedtest(){
 	rm -f /tmp/stcli.tmp
 }
 
-playsound ${ALERT_SOUND}
-systemp
-playsound ${ALERT_SOUND}
-sysload
-playsound ${ALERT_SOUND}
-sysmem
-playsound ${ALERT_SOUND}
-sysspeedtest
+while test $# -gt 0; do
+		case "$1" in
+			-h|--help)
+					version
+					echo "options:"
+					echo -e "-h, --help\tIts what youre looking at!"
+					echo -e "-t, --temp\tQuery system temperature"
+					echo -e "-l, --load\tQuery system load"
+					echo -e "-m, --mem\tQuery system memory"
+					echo -e "-s, --speed\tQuery system internet (WAN) speed"
+					exit 0
+					;;
+			-t|--temp)
+					systemp
+					shift
+					;;
+			-l|--load)
+					sysload
+					shift
+					;;
+			-m|--mem)
+					sysmem
+					shift
+					;;						
+			-s|--speed)
+					printf "Testing internet speed...please wait (this could take some time)\n"
+					sysspeedtest
+					;;
+			*)
+					break
+					;;
+					esac
+done
+printf "I'm much more useful if you give me a task.  Use -h for help!\n"
+exit 1
