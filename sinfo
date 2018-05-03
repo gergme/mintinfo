@@ -77,7 +77,7 @@ sysmem(){
 		if [ "$VOCAL" != 0 ]; then
 			MEMORY_FREE_PERCENT=`echo ${MEMORY_FREE_PERCENT} | cut -d "." -f1`
 			if [ "$FREE_SWAP" == "0B" ]; then FREE_SWAP="none"; fi
-			say "Your system has ${TOTAL_MEMORY} of memory, your usage percentage is currently at ${MEMORY_FREE_PERCENT} percent, you are currently using ${FREE_SWAP} of swap"
+			say "Your system has ${TOTAL_MEMORY} of memory, your usage percentage is currently at ${MEMORY_FREE_PERCENT} percent, ${FREE_SWAP} of swap is active"
 		fi
 }
 
@@ -115,24 +115,29 @@ while test $# -gt 0; do
 					exit 0
 					;;
 			-t|--temp)
+					playsound ${ALERT_SOUND}
 					systemp
 					shift
 					;;
 			-l|--load)
+					playsound ${ALERT_SOUND}
 					sysload
 					shift
 					;;
 			-m|--mem)
+					playsound ${ALERT_SOUND}
 					sysmem
 					shift
 					;;						
 			-s|--speed)
 					printf "Testing internet speed...please wait\n"
+					playsound ${ALERT_SOUND}
 					sysspeedtest
 					;;
 			*)
-					printf " I dont know what you want from me :( \n"
-					exit 1
+					printf "I dont know what you want.\n"
+					break
 					;;
-		esac
+					esac
 done
+exit 1
