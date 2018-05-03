@@ -97,6 +97,11 @@ sysspeedtest(){
 	rm -f /tmp/stcli.tmp
 }
 
+version(){
+printf "sinfo v1.0.5\n"
+printf "Greg Holthaus\n"
+}
+
 while test $# -gt 0; do
 		case "$1" in
 			-h|--help)
@@ -122,13 +127,12 @@ while test $# -gt 0; do
 					shift
 					;;						
 			-s|--speed)
-					printf "Testing internet speed...please wait (this could take some time)\n"
+					printf "Testing internet speed...please wait\n"
 					sysspeedtest
 					;;
 			*)
-					break
+					printf " I dont know what you want from me :( \n"
+					exit 1
 					;;
-					esac
+		esac
 done
-printf "I'm much more useful if you give me a task.  Use -h for help!\n"
-exit 1
