@@ -13,9 +13,3 @@ Added while loop to handle all switches.
 -m, --mem	Query system memory
 -s, --speed	Query system internet (WAN) speed
 ```
-
-2018-May-8
-----------
-Added --debug cli switch
-
-Reformatted DEBUG output
