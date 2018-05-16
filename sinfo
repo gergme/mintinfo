@@ -17,6 +17,8 @@ playsound(){
 			printf "DEBUG:  Sound location | ${@}\n"
 			printf "DEBUG:  Sound exists   | "
 				if [ -f "${@}" ]; then printf "TRUE\n" else printf "FALSE\n"; fi
+			printf "DEBUG:  Vocal          | "
+				if [ "$VOCAL" != 0 ]; then printf "TRUE\n" else printf "FALSE\n"; fi
 			printf "=============================================================\n"
 		fi
 }
@@ -27,7 +29,7 @@ say(){
 
 systemp(){
 	# Grab the sensor temperature
-	SENSOR_TEMP=`sensors -f | grep ${SENSOR_MONITOR} | cut -d "+" -f2 | cut -d "." -f1`
+	SENSOR_TEMP=`sensors -f | grep ${SENSOR_MONITOR} | head -n1 | cut -d "+" -f2 | cut -d "." -f1`
 
 	# Test if the temperature goes over threshold
 		if [ "${SENSOR_TEMP}" -ge "${SENSOR_MAX}" ]; then SENSOR_ALERT=1; else SENSOR_ALERT=0; fi
@@ -112,7 +114,8 @@ while test $# -gt 0; do
 			-h|--help)
 					version
 					echo "options:"
-					echo -e "--debug\t\tEnable debug information (must be first argument)"
+					echo -e "--no-speak\t Disable speaking (enables DEBUG)"
+					echo -e "--debug\t\tEnable debug information (must be first switch)"
 					echo -e "-h, --help\tIts what youre looking at!"
 					echo -e "-t, --temp\tQuery system temperature"
 					echo -e "-l, --load\tQuery system load"
@@ -120,6 +123,12 @@ while test $# -gt 0; do
 					echo -e "-s, --speed\tQuery system internet (WAN) speed"
 					exit 0
 					;;
+			--no-speak)
+					VOCAL=0
+					DEBUG=1
+					printf "=============================================================\n"
+                                        shift
+                                        ;;
 			--debug)
 					DEBUG=1
 					printf "=============================================================\n"
