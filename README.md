@@ -18,4 +18,6 @@ Added while loop to handle all switches.
 ----------
 Added --debug cli switch
 
+2018-May-10
+-----------
 Reformatted DEBUG output
