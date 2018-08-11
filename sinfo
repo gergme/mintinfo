@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
 # Variables
+VOCAL=0 # 0 (false) or 1 (true)
+# If you set vocal to 0, you need output, so we set debug mode to 1 (true)
+if [ "${VOCAL}" == "0" ]; then DEBUG=1
+else
+# Keep this here so if vocal is disabled you get some output!
 DEBUG=0 # 0 (false) or 1 (true)
-VOCAL=1 # 0 (false) or 1 (true)
+fi
 SENSOR_MONITOR="temp1"
 SENSOR_MAX="110"
 LOAD_MAX="5"
@@ -18,7 +23,7 @@ playsound(){
 			printf "DEBUG:  Sound exists   | "
 				if [ -f "${@}" ]; then printf "TRUE\n" else printf "FALSE\n"; fi
 			printf "DEBUG:  Vocal          | "
-				if [ "$VOCAL" != 0 ]; then printf "TRUE\n" else printf "FALSE\n"; fi
+				if [ "$VOCAL" == "1" ]; then printf "ENABLED\n"; else printf "DISABLED\n"; fi
 			printf "=============================================================\n"
 		fi
 }
