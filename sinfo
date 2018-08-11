@@ -24,7 +24,7 @@ playsound(){
 				if [ -f "${@}" ]; then printf "TRUE\n" else printf "FALSE\n"; fi
 			printf "DEBUG:  Vocal                     | "
 				if [ "$VOCAL" == "1" ]; then printf "ENABLED\n"; else printf "DISABLED\n"; fi
-			printf "=============================================================\n"
+			printf "=======================================================================\n"
 		fi
 }
 
@@ -42,7 +42,7 @@ systemp(){
 		if [ "$DEBUG" != 0 ]; then
 			printf "DEBUG:  Sensor temperature        | ${SENSOR_TEMP}°F\n"
 			printf "DEBUG:  Sensor threshold          | ${SENSOR_ALERT}\n"
-			printf "=============================================================\n"
+			printf "=======================================================================\n"
 		fi
 
 		if [ "$VOCAL" != 0 ]; then
@@ -63,7 +63,7 @@ sysload(){
 			printf "DEBUG:  CPU LoadAvg 5 minute      | ${CPU_LOAD_5MIN}\n"
 			printf "DEBUG:  CPU LoadAvg 15 minute     | ${CPU_LOAD_15MIN}\n"
 			printf "DEBUG:  System LoadAvg Percentage | ${SYSTEM_LOAD_PERCENT}%%\n"
-			printf "=============================================================\n"
+			printf "=======================================================================\n"
 		fi
 		if [ "$VOCAL" != 0 ]; then
 			SYSTEM_LOAD_PERCENT=`echo ${SYSTEM_LOAD_PERCENT} | cut -d "." -f1`
@@ -83,7 +83,7 @@ sysmem(){
 			printf "DEBUG:  Free memory               | ${FREE_MEMORY}\n"
 			printf "DEBUG:  In-use memory             | ${INUSE_MEMORY}\n"
 			printf "DEBUG:  In-use memory percentage  | ${MEMORY_FREE_PERCENT}%%\n"
-			printf "=============================================================\n"
+			printf "=======================================================================\n"
 		fi
 		if [ "$VOCAL" != 0 ]; then
 			MEMORY_FREE_PERCENT=`echo ${MEMORY_FREE_PERCENT} | cut -d "." -f1`
@@ -101,7 +101,7 @@ sysspeedtest(){
 			printf "DEBUG:  Ping                      | ${SPEEDTEST_PING}\n"
 			printf "DEBUG:  Download                  | ${SPEEDTEST_DL}\n"
 			printf "DEBUG:  Upload                    | ${SPEEDTEST_UL}\n"
-			printf "=============================================================\n"
+			printf "=======================================================================\n"
 		fi
 		if [ "$VOCAL" != 0 ]; then
 			say "Your internet ping is averaging ${SPEEDTEST_PING}, your download speed is at ${SPEEDTEST_DL} with an upload speed of ${SPEEDTEST_UL}" &> /dev/null
@@ -131,12 +131,12 @@ while test $# -gt 0; do
 			--no-speak)
 					VOCAL=0
 					DEBUG=1
-					printf "=============================================================\n"
+					printf "=======================================================================\n"
                                         shift
                                         ;;
 			--debug)
 					DEBUG=1
-					printf "=============================================================\n"
+					printf "=======================================================================\n"
 					shift
 					;;
 			-t|--temp)
