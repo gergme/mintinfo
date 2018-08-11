@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Variables
-VOCAL=0 # 0 (false) or 1 (true)
+VOCAL=1 # 0 (false) or 1 (true)
 # If you set vocal to 0, you need output, so we set debug mode to 1 (true)
 if [ "${VOCAL}" == "0" ]; then DEBUG=1
 else
